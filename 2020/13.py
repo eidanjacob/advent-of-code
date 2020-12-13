@@ -1,7 +1,6 @@
 notes = open("input.txt").readlines()
 earliest_depart = int(notes[0])
-print(notes[1].split(",")[25:35])
-ids_in_service = [int(x) for x in notes[1].split(",") if x.isnumeric()]
+ids_in_service = [int(x) for x in notes[1].replace("\n", "").split(",") if x.isnumeric()]
 found = False
 depart_time = earliest_depart
 while not found:
@@ -13,7 +12,7 @@ while not found:
     depart_time += 1
     
 modulo_conditions = dict()
-bus_ids = notes[1].split(",")
+bus_ids = notes[1].replace("\n", "").split(",")
 for index, bus_id in enumerate(bus_ids):
     if bus_id.isnumeric():
         modulo_conditions[int(bus_id)] = index
