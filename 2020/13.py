@@ -24,12 +24,4 @@ sorted_ids.sort()
 t = max(sorted_ids) - modulo_conditions[max(sorted_ids)]
 increment = max(sorted_ids)
 
-def passes(time):
-    for bus_id, offset in modulo_conditions.items():
-        if (time + offset) % bus_id != 0:
-            return False
-    return True
-
-while not passes(t):
-    t += increment
-print(t)
+# i just used wolfram alpha for part 2 lol
