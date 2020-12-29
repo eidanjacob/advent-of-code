@@ -1,4 +1,20 @@
-Sprinkles: capacity 5, durability -1, flavor 0, texture 0, calories 5
-PeanutButter: capacity -1, durability 3, flavor 0, texture 0, calories 1
-Frosting: capacity 0, durability -1, flavor 4, texture 0, calories 6
-Sugar: capacity -1, durability 0, flavor 0, texture 2, calories 8
+50
+44
+11
+49
+42
+46
+18
+32
+26
+40
+21
+7
+18
+43
+10
+47
+36
+24
+22
+40
