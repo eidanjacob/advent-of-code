@@ -1,22 +1,27 @@
-import itertools
-distances = open("input.txt").readlines()
+rxns, chem = open("input.txt").read().split("\n\n")
+cal_products = set()
+replacements = set()
+for rxn in rxns.split("\n"):
+    reactant, product = rxn.strip().split(" => ")
+    replacements.add((reactant, product))
 
-cities = set([distance.split(" ")[0] for distance in distances]).union(set([distance.split(" ")[2] for distance in distances]))
+for reactant, product  in replacements:
+    for i in range(len(chem)-len(reactant)+1):
+        if chem[i:(i+len(reactant))] == reactant:
+            cal_products.add(chem[:i] + product + chem[(i+len(reactant)):])
 
-def get_distance(city1, city2):
-    for distance in distances:
-        if city1 in distance and city2 in distance:
-            return int(distance.split(" ")[-1])
+print(len(cal_products))
 
-min_distance = float("inf")
-max_distance = 0
-for permutation in itertools.permutations(cities):
-    distance = 0
-    for i in range(len(permutation)-1):
-        distance += get_distance(permutation[i], permutation[i+1])
-    if distance < min_distance:
-        min_distance = distance
-    if distance > max_distance:
-        max_distance = distance
+def rev_synth_dfs(chemical, depth):
+    if chemical == "e":
+        return True, depth
+    for reactant, product in replacements:
+        for i in range(len(chemical)-len(product)+1):
+            if chemical[i:(i+len(product))] == product:
+                next_chemical = chemical[:i] + reactant + chemical[(i + len(product)):]
+                works, steps = rev_synth_dfs(next_chemical, depth + 1)
+                if works:
+                    return True, steps
+    return False, depth
 
-print(min_distance, max_distance)
+print(rev_synth_dfs(chem.strip(), 0))
